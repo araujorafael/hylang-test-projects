@@ -1,3 +1,3 @@
 # hylang-test-projects
 
-Simple compilatio of projects using [Hylang](https://github.com/hylang/hy)
+Simple compilation of test projects using [Hylang](https://github.com/hylang/hy) 
