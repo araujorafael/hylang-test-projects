@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+
+  hy-flask:
+    build: .
+    ports:
+      - "5000"

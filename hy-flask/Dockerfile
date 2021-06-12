@@ -27,6 +27,8 @@ RUN apt-get update && apt-get clean
 # add and install requirements
 RUN pip install --upgrade pip
 COPY ./requirements.txt .
+COPY ./app/app.hy .
+
 RUN pip install -r requirements.txt
 
 # switch to non-root user
@@ -35,8 +37,9 @@ USER user
 # disables lag in stdout/stderr output
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
+
 # Path
 ENV PATH="/opt/venv/bin:$PATH"
 
 # run
-CMD ["python", "-m", "shim"]
+CMD ["hy", "app.hy"]
