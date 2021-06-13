@@ -1,5 +1,4 @@
-#!/usr/bin/env hy
-(import [flask [Flask]])
+(import [flask [Flask request]])
 (setv app (Flask "__main__"))
 
 (with-decorator (app.route "/hello-world")
@@ -26,10 +25,20 @@
 
 (setv route (. app route))
 (with-decorator (route "/about")
-  ;; if you make get-request to "{url}/about/",
-  ;; flask will send 404 error"
   (defn about []
     "About page"))
+;;------------------------------------
+
+;; ------- HTTP methods example --------
+;; Only POST and GET verbs will be accepted
+;; OBS: (fn arg1 :arg2 [str str]) direcly translates too python:
+;; fn(arg1, arg2=[str,str])
+(with-decorator (route "/login"
+                       :methods ["GET" "POST"])
+  (defn login []
+    (if (= "POST" (. request method))
+      "POST RECIVED, CALL LOGIN ROUTINE"
+      "GET RECIVED, CALL GETTING PAGE")))
 ;;------------------------------------
 
 (.run app)
