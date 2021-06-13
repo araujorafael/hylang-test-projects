@@ -31,7 +31,7 @@
 
 ;; ------- HTTP methods example --------
 ;; Only POST and GET verbs will be accepted
-;; OBS: (fn arg1 :arg2 [str str]) direcly translates too python:
+;; OBS: (fn arg1 :arg2 [str str]) direcly translates to:
 ;; fn(arg1, arg2=[str,str])
 (with-decorator (route "/login"
                        :methods ["GET" "POST"])
