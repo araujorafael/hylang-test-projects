@@ -1,4 +1,7 @@
+(require [hy.contrib.walk [let]])
+
 (import [flask [Flask request]])
+
 (setv app (Flask "__main__"))
 
 (with-decorator (app.route "/hello-world")
@@ -36,9 +39,8 @@
 (with-decorator (route "/login"
                        :methods ["GET" "POST"])
   (defn login []
-    (if (= "POST" (. request method))
-      "POST RECIVED, CALL LOGIN ROUTINE"
-      "GET RECIVED, CALL GETTING PAGE")))
+    (let [http-method (. request method)]
+      (if (= "POST" http-method)
+        f"{http-method} method. SHOULD MAKE LOGIN REQUEST"
+        f"{http-method} method. SHOULD RENDER LOGIN FORM"))))
 ;;------------------------------------
-
-(.run app)

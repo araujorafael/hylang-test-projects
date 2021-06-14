@@ -1,6 +1,6 @@
 # base image
 FROM python:3.8.4-buster
-
+EXPOSE 5000
 # create user
 ARG USER_ID=1000
 ENV USER_ID $USER_ID
@@ -27,7 +27,7 @@ RUN apt-get update && apt-get clean
 # add and install requirements
 RUN pip install --upgrade pip
 COPY ./requirements.txt .
-COPY ./app/app.hy .
+COPY ./app .
 
 RUN pip install -r requirements.txt
 
@@ -41,5 +41,8 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Path
 ENV PATH="/opt/venv/bin:$PATH"
 
+ENV FLASK_APP=shim.py
+ENV FLASK_ENV=production
+
 # run
-CMD ["hy", "app.hy"]
+CMD flask run --host "0.0.0.0"
