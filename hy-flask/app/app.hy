@@ -17,7 +17,7 @@
 (with-decorator ((. app route) "/path/<path:subpath>")
   (defn show_subpath [subpath]
     f"SUBPATH {subpath}"))
-
+;; TODO: ADD MORE EXAMPLES
 
 ;; ------ redirection example -------
 (with-decorator (.route app "/projects/")
